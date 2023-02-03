@@ -1,0 +1,42 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /v1.0/
+spring:
+  application:
+    name: app-account-service-api
+    version: develop
+  sleuth:
+     sampler:
+        probability: 1
+service:
+  service-test:
+    url: http://localhost
+    clientId: 57aYr56G2CcQSgzG
+    clientSecret: 1SmRBGuRh
+    maxTimeInMillis: 300000 #300000 millis = 5 minutes
+    path:
+      auth: /token
+      customer: /customer
+---
+server:
+  port: ${PORT}
+  servlet:
+    context-path: /v1.0/
+spring:
+  profiles: release
+  application:
+    name: app-account-service-api
+    version: ${APP_VERSION}
+  sleuth:
+     sampler:
+        probability: 1
+service:
+  service-test:
+    url: ${SERVICE-TEST_SERVICE_URL}
+    clientId: ${SERVICE-TEST_SERVICE_CLIENT_ID}
+    clientSecret: ${SERVICE-TEST_SERVICE_CLIENT_SECRET}
+    maxTimeInMillis: 300000 #300000 millis = 5 minutes
+    path:
+      auth: /token
+      customer: ${SERVICE-TEST_SERVICE_CUSTOMER}
