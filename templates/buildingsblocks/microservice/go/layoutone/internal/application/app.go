@@ -1,7 +1,6 @@
 package application
 
 import (
-	"context"
 	"errors"
 	"fmt"
 	"log"
@@ -10,18 +9,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/fernandoocampo/hexagonal-template-go/internal/adapters/anydb"
-	"github.com/fernandoocampo/hexagonal-template-go/internal/adapters/web"
-	"github.com/fernandoocampo/hexagonal-template-go/internal/configurations"
-	"github.com/fernandoocampo/hexagonal-template-go/internal/people"
+	"github.com/fernandoocampo/basic-micro/internal/adapter/stores"
+	"github.com/fernandoocampo/basic-micro/internal/adapter/web"
+	"github.com/fernandoocampo/basic-micro/internal/pets"
+	"github.com/fernandoocampo/basic-micro/internal/setups"
+	"go.uber.org/zap"
 )
-
-// Instance defines an application.
-type Instance struct {
-	Name          string
-	configuration configurations.Application
-	dbConn        *anyDBConnection
-}
 
 // Event contains an application event.
 type Event struct {
@@ -29,67 +22,126 @@ type Event struct {
 	Error   error
 }
 
-// New creates a new application.
-func New(args []string) *Instance {
-	return &Instance{}
+// Setup contains application metadata
+type Setup struct {
+	Version    string
+	BuildDate  string
+	CommitHash string
 }
 
-// Start initialize and start the Instance
-func (i *Instance) Start() error {
-	log.Println("level", "INFO", "msg", "starting application")
+// Server is the server of our application.
+type Server struct {
+	logger     *zap.Logger
+	store      *stores.Store
+	setup      setups.Application
+	version    string
+	buildDate  string
+	commitHash string
+}
 
-	confError := i.loadConfiguration()
+var (
+	errStartingApplication = errors.New("unable to start application")
+)
+
+func NewServer(settings Setup) *Server {
+	newServer := Server{
+		version:    settings.Version,
+		buildDate:  settings.BuildDate,
+		commitHash: settings.CommitHash,
+	}
+
+	return &newServer
+}
+
+func (s *Server) Run() error {
+	s.notifyStart()
+
+	confError := s.loadConfiguration()
 	if confError != nil {
-		panic(confError)
+		return errStartingApplication
 	}
-	log.Println("level", "DEBUG", "msg", "application configuration", "parameters", i.configuration)
 
-	log.Println("level", "INFO", "msg", "starting database connection")
-	err := i.openDBConnection()
+	loggerError := s.initializeLogger()
+	if loggerError != nil {
+		return errStartingApplication
+	}
+
+	s.logger.Debug("application configuration", zap.String("parameters", fmt.Sprintf("%+v", s.setup)))
+
+	s.logger.Info("starting database connection")
+
+	err := s.createStorer()
 	if err != nil {
-		log.Println("level", "ERROR", "msg", "database connection could not be stablished")
-		return err
+		return errStartingApplication
 	}
 
-	peopleRepository := i.createPeopleRepository()
-	peopleService := people.NewService(peopleRepository)
-	peopleEndpoints := people.NewEndpoints(peopleService)
+	petServiceSetup := pets.ServiceSetup{
+		Storer: s.store,
+		Logger: s.logger,
+	}
+	petService := pets.NewService(petServiceSetup)
+	petEndpoints := pets.NewEndpoints(petService, s.logger)
 
 	eventStream := make(chan Event)
-	i.listenToOSSignal(eventStream)
-	i.startWebServer(peopleEndpoints, eventStream)
+	s.listenToOSSignal(eventStream)
+	s.startWebServer(petEndpoints, eventStream)
 
 	eventMessage := <-eventStream
-	fmt.Println(
-		"level", "INFO",
-		"msg", "ending server",
-		"event", eventMessage.Message,
-	)
+	s.logger.Info("ending server", zap.String("event", eventMessage.Message))
 
 	if eventMessage.Error != nil {
-		fmt.Println(
-			"level", "ERROR",
-			"msg", "ending server with error",
-			"error", eventMessage.Error,
-		)
-		return eventMessage.Error
+		s.logger.Error("ending server with error", zap.Error(eventMessage.Error))
+
+		return errStartingApplication
 	}
+
 	return nil
 }
 
-// Stop stop application, take advantage of this to clean resources
-func (i *Instance) Stop() {
-	log.Println("level", "INFO", "msg", "stopping the application")
-	if i.dbConn != nil {
-		i.dbConn.Close()
+func (s *Server) initializeLogger() error {
+	var logger *zap.Logger
+	var err error
+
+	if s.setup.LogLevel == setups.ProductionLog {
+		logger, err = zap.NewProduction()
+	} else {
+		logger, err = zap.NewDevelopment()
 	}
+
+	if err != nil {
+		fmt.Println(
+			"level", "ERROR",
+			"msg", "unable to initialize logger",
+			"error", err,
+		)
+
+		return fmt.Errorf("unable to initialize logger: %w", err)
+	}
+
+	s.logger = logger
+
+	return nil
 }
 
-func (i *Instance) listenToOSSignal(eventStream chan<- Event) {
+func (s *Server) notifyStart() {
+	log.Println(
+		"starting service",
+		"version:", s.version,
+		"commit:", s.commitHash,
+		"build date:", s.buildDate,
+	)
+}
+
+// Stop stop application, take advantage of this to clean resources
+func (s *Server) Stop() {
+	s.logger.Info("stopping the application")
+}
+
+func (s *Server) listenToOSSignal(eventStream chan<- Event) {
 	go func() {
 		c := make(chan os.Signal, 1)
 		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
-		osSignal := fmt.Sprintf("%s", <-c)
+		osSignal := (<-c).String()
 		event := Event{
 			Message: osSignal,
 		}
@@ -98,11 +150,17 @@ func (i *Instance) listenToOSSignal(eventStream chan<- Event) {
 }
 
 // startWebServer starts the web server.
-func (i *Instance) startWebServer(endpoints *people.Endpoints, eventStream chan<- Event) {
+func (s *Server) startWebServer(petEndpoints pets.Endpoints, eventStream chan<- Event) {
 	go func() {
-		log.Println("msg", "starting http server", "http:", i.configuration.ApplicationPort)
-		handler := web.NewHTTPServer(endpoints)
-		err := http.ListenAndServe(i.configuration.ApplicationPort, handler)
+		s.logger.Info("starting http server", zap.String("port", s.setup.ApplicationPort))
+		router := petsRouter{
+			router:    web.NewRouter(),
+			endpoints: petEndpoints,
+			decoders:  web.NewPetDecoders(s.logger),
+			encoders:  web.NewPetEncoders(s.logger),
+		}
+		handler := newPetsRouter(router)
+		err := http.ListenAndServe(s.setup.ApplicationPort, handler)
 		if err != nil {
 			eventStream <- Event{
 				Message: "web server was ended with error",
@@ -116,42 +174,23 @@ func (i *Instance) startWebServer(endpoints *people.Endpoints, eventStream chan<
 	}()
 }
 
-func (i *Instance) loadConfiguration() error {
-	applicationSetUp, err := configurations.Load()
+func (s *Server) loadConfiguration() error {
+	applicationSetUp, err := setups.Load()
 	if err != nil {
 		log.Println("level", "ERROR", "msg", "application setup could not be loaded", "error", err)
+
 		return errors.New("application setup could not be loaded")
 	}
-	i.configuration = applicationSetUp
+	s.setup = applicationSetUp
 	return nil
 }
 
-func (i *Instance) createPeopleRepository() *anydb.Client {
-	newPeopleRepository := anydb.NewClient(i.dbConn)
-	return newPeopleRepository
-}
-
-func (i *Instance) openDBConnection() error {
-	newAnyDBConnection := anyDBConnection{
-		data: make(map[string]interface{}),
+func (s *Server) createStorer() error {
+	storeSetup := stores.Setup{
+		Logger: s.logger,
 	}
-	i.dbConn = &newAnyDBConnection
-	return nil
-}
+	storer := stores.NewStore(storeSetup)
+	s.store = storer
 
-// anyDBConnection simulates a hypotetical external library.
-type anyDBConnection struct {
-	data map[string]interface{}
-}
-
-// Persist hypotetical persist method.
-func (a *anyDBConnection) Persist(ctx context.Context, data map[string]interface{}) error {
-	log.Println("level", "DEBUG", "msg", "storing new record", data)
-	a.data = data
-	return nil
-}
-
-// Close close any db connection.
-func (a *anyDBConnection) Close() error {
 	return nil
 }
