@@ -37,7 +37,7 @@
               </source>
               <referredProperty xsi:type="ecore:EAttribute" href="http://com/microservice#//Microservice/name"/>
             </argument>
-            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="templates/buildingsblocks/microservice/go/">
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="templates/buildingsblocks/microservice/go/layoutone/">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="fileName" referredVariable="/0/generateGoMic/%.1/fileName">
@@ -54,7 +54,7 @@
           <argument xsi:type="ocl.ecore:VariableExp" name="aGenerator" referredVariable="/0/generateGoMic/aGenerator">
             <eType xsi:type="ecore:EClass" href="http://com/microservice#//Generator"/>
           </argument>
-          <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="templates/buildingsblocks/microservice/go/">
+          <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="templates/buildingsblocks/microservice/go/layoutone/">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           </argument>
         </iterSet>
@@ -227,7 +227,7 @@
   <ecore:EAnnotation source="positions">
     <eAnnotations source="positions.0" references="/0/generateGoMic">
       <details key="start" value="145"/>
-      <details key="end" value="650"/>
+      <details key="end" value="670"/>
       <details key="line" value="5"/>
     </eAnnotations>
     <eAnnotations source="positions.1" references="/0/generateGoMic/%">
@@ -237,67 +237,67 @@
     </eAnnotations>
     <eAnnotations source="positions.2" references="/0/generateGoMic/%.1">
       <details key="start" value="204"/>
-      <details key="end" value="483"/>
+      <details key="end" value="503"/>
       <details key="line" value="7"/>
     </eAnnotations>
     <eAnnotations source="positions.3" references="/0/generateGoMic/%.1/%">
-      <details key="start" value="307"/>
-      <details key="end" value="475"/>
+      <details key="start" value="317"/>
+      <details key="end" value="495"/>
       <details key="line" value="8"/>
     </eAnnotations>
     <eAnnotations source="positions.4" references="/0/generateGoMic/%.1/%/%">
-      <details key="start" value="432"/>
-      <details key="end" value="464"/>
+      <details key="start" value="452"/>
+      <details key="end" value="484"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.5" references="/0/generateGoMic/%.1/%/%/aGenerator">
-      <details key="start" value="444"/>
-      <details key="end" value="454"/>
+      <details key="start" value="464"/>
+      <details key="end" value="474"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.6" references="/0/generateGoMic/%.1/%/%/fileName">
-      <details key="start" value="455"/>
-      <details key="end" value="463"/>
+      <details key="start" value="475"/>
+      <details key="end" value="483"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.7" references="/0/generateGoMic/%.1/%/%.1">
-      <details key="start" value="466"/>
-      <details key="end" value="468"/>
+      <details key="start" value="486"/>
+      <details key="end" value="488"/>
       <details key="line" value="10"/>
     </eAnnotations>
     <eAnnotations source="positions.8" references="/0/generateGoMic/%.1/%/%.2">
-      <details key="start" value="314"/>
-      <details key="end" value="420"/>
+      <details key="start" value="324"/>
+      <details key="end" value="440"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.9" references="/0/generateGoMic/%.1/%/%.2/aGenerator">
-      <details key="start" value="326"/>
-      <details key="end" value="336"/>
+      <details key="start" value="336"/>
+      <details key="end" value="346"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.10" references="/0/generateGoMic/%.1/%/%.2/%">
-      <details key="start" value="337"/>
-      <details key="end" value="365"/>
+      <details key="start" value="347"/>
+      <details key="end" value="375"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.11" references="/0/generateGoMic/%.1/%/%.2/%/%">
-      <details key="start" value="337"/>
-      <details key="end" value="360"/>
+      <details key="start" value="347"/>
+      <details key="end" value="370"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.12" references="/0/generateGoMic/%.1/%/%.2/%/%/aGenerator">
-      <details key="start" value="337"/>
-      <details key="end" value="347"/>
+      <details key="start" value="347"/>
+      <details key="end" value="357"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.13" references="/0/generateGoMic/%.1/%/%.2/%.1">
-      <details key="start" value="366"/>
-      <details key="end" value="410"/>
+      <details key="start" value="376"/>
+      <details key="end" value="430"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.14" references="/0/generateGoMic/%.1/%/%.2/fileName">
-      <details key="start" value="411"/>
-      <details key="end" value="419"/>
+      <details key="start" value="431"/>
+      <details key="end" value="439"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.15" references="/0/generateGoMic/%.1/fileName">
@@ -307,7 +307,7 @@
     </eAnnotations>
     <eAnnotations source="positions.16" references="/0/generateGoMic/%.1/%.1">
       <details key="start" value="230"/>
-      <details key="end" value="303"/>
+      <details key="end" value="313"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.17" references="/0/generateGoMic/%.1/%.1/aGenerator">
@@ -317,42 +317,42 @@
     </eAnnotations>
     <eAnnotations source="positions.18" references="/0/generateGoMic/%.1/%.1/%">
       <details key="start" value="258"/>
-      <details key="end" value="302"/>
+      <details key="end" value="312"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.19" references="/0/generateGoMic/%.2">
-      <details key="start" value="485"/>
-      <details key="end" value="489"/>
+      <details key="start" value="505"/>
+      <details key="end" value="509"/>
       <details key="line" value="12"/>
     </eAnnotations>
     <eAnnotations source="positions.20" references="/0/generateGoMic/%.3">
-      <details key="start" value="512"/>
-      <details key="end" value="514"/>
+      <details key="start" value="532"/>
+      <details key="end" value="534"/>
       <details key="line" value="15"/>
     </eAnnotations>
     <eAnnotations source="positions.21" references="/0/generateGoMic/%.4">
-      <details key="start" value="537"/>
-      <details key="end" value="539"/>
+      <details key="start" value="557"/>
+      <details key="end" value="559"/>
       <details key="line" value="17"/>
     </eAnnotations>
     <eAnnotations source="positions.22" references="/0/generateGoMic/%.5">
-      <details key="start" value="564"/>
-      <details key="end" value="566"/>
+      <details key="start" value="584"/>
+      <details key="end" value="586"/>
       <details key="line" value="19"/>
     </eAnnotations>
     <eAnnotations source="positions.23" references="/0/generateGoMic/%.6">
-      <details key="start" value="591"/>
-      <details key="end" value="593"/>
+      <details key="start" value="611"/>
+      <details key="end" value="613"/>
       <details key="line" value="21"/>
     </eAnnotations>
     <eAnnotations source="positions.24" references="/0/generateGoMic/%.7">
-      <details key="start" value="614"/>
-      <details key="end" value="616"/>
+      <details key="start" value="634"/>
+      <details key="end" value="636"/>
       <details key="line" value="23"/>
     </eAnnotations>
     <eAnnotations source="positions.25" references="/0/generateGoMic/%.8">
-      <details key="start" value="637"/>
-      <details key="end" value="639"/>
+      <details key="start" value="657"/>
+      <details key="end" value="659"/>
       <details key="line" value="25"/>
     </eAnnotations>
     <eAnnotations source="positions.26" references="/0/generateGoMic/aGenerator">
