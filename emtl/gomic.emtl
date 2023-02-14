@@ -37,8 +37,37 @@
               </source>
               <referredProperty xsi:type="ecore:EAttribute" href="http://com/microservice#//Microservice/name"/>
             </argument>
-            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="templates/buildingsblocks/microservice/go/layoutone/">
+            <argument xsi:type="ocl.ecore:OperationCallExp">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="templates/buildingsblocks/microservice/go/">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </source>
+                <argument xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_OclAny_Class/toString">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EEnum" href="http://com/microservice#//ArchitecturalStyle"/>
+                      <source xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ecore:EClass" href="http://com/microservice#//Microservice"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="aGenerator" referredVariable="/0/generateGoMic/aGenerator">
+                          <eType xsi:type="ecore:EClass" href="http://com/microservice#//Generator"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="http://com/microservice#//Generator/microservice"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EAttribute" href="http://com/microservice#//Microservice/architecturalStyle"/>
+                    </source>
+                  </source>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/toLower"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+              </source>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="/">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
             </argument>
             <argument xsi:type="ocl.ecore:VariableExp" name="fileName" referredVariable="/0/generateGoMic/%.1/fileName">
               <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
@@ -54,8 +83,37 @@
           <argument xsi:type="ocl.ecore:VariableExp" name="aGenerator" referredVariable="/0/generateGoMic/aGenerator">
             <eType xsi:type="ecore:EClass" href="http://com/microservice#//Generator"/>
           </argument>
-          <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="templates/buildingsblocks/microservice/go/layoutone/">
+          <argument xsi:type="ocl.ecore:OperationCallExp">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="templates/buildingsblocks/microservice/go/">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </source>
+              <argument xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:OperationCallExp" referredOperation="/1/oclstdlib_OclAny_Class/toString">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ecore:EEnum" href="http://com/microservice#//ArchitecturalStyle"/>
+                    <source xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EClass" href="http://com/microservice#//Microservice"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="aGenerator" referredVariable="/0/generateGoMic/aGenerator">
+                        <eType xsi:type="ecore:EClass" href="http://com/microservice#//Generator"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EReference" href="http://com/microservice#//Generator/microservice"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://com/microservice#//Microservice/architecturalStyle"/>
+                  </source>
+                </source>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/toLower"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="/">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
           </argument>
         </iterSet>
       </body>
@@ -157,6 +215,10 @@
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
       </eAnnotations>
+      <eOperations name="toString">
+        <eAnnotations source="MTL non-standard"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Collection(T)_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
@@ -227,7 +289,7 @@
   <ecore:EAnnotation source="positions">
     <eAnnotations source="positions.0" references="/0/generateGoMic">
       <details key="start" value="145"/>
-      <details key="end" value="670"/>
+      <details key="end" value="818"/>
       <details key="line" value="5"/>
     </eAnnotations>
     <eAnnotations source="positions.1" references="/0/generateGoMic/%">
@@ -237,125 +299,205 @@
     </eAnnotations>
     <eAnnotations source="positions.2" references="/0/generateGoMic/%.1">
       <details key="start" value="204"/>
-      <details key="end" value="503"/>
+      <details key="end" value="651"/>
       <details key="line" value="7"/>
     </eAnnotations>
     <eAnnotations source="positions.3" references="/0/generateGoMic/%.1/%">
-      <details key="start" value="317"/>
-      <details key="end" value="495"/>
+      <details key="start" value="391"/>
+      <details key="end" value="643"/>
       <details key="line" value="8"/>
     </eAnnotations>
     <eAnnotations source="positions.4" references="/0/generateGoMic/%.1/%/%">
-      <details key="start" value="452"/>
-      <details key="end" value="484"/>
+      <details key="start" value="600"/>
+      <details key="end" value="632"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.5" references="/0/generateGoMic/%.1/%/%/aGenerator">
-      <details key="start" value="464"/>
-      <details key="end" value="474"/>
+      <details key="start" value="612"/>
+      <details key="end" value="622"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.6" references="/0/generateGoMic/%.1/%/%/fileName">
-      <details key="start" value="475"/>
-      <details key="end" value="483"/>
+      <details key="start" value="623"/>
+      <details key="end" value="631"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.7" references="/0/generateGoMic/%.1/%/%.1">
-      <details key="start" value="486"/>
-      <details key="end" value="488"/>
+      <details key="start" value="634"/>
+      <details key="end" value="636"/>
       <details key="line" value="10"/>
     </eAnnotations>
     <eAnnotations source="positions.8" references="/0/generateGoMic/%.1/%/%.2">
-      <details key="start" value="324"/>
-      <details key="end" value="440"/>
+      <details key="start" value="398"/>
+      <details key="end" value="588"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.9" references="/0/generateGoMic/%.1/%/%.2/aGenerator">
-      <details key="start" value="336"/>
-      <details key="end" value="346"/>
+      <details key="start" value="410"/>
+      <details key="end" value="420"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.10" references="/0/generateGoMic/%.1/%/%.2/%">
-      <details key="start" value="347"/>
-      <details key="end" value="375"/>
+      <details key="start" value="421"/>
+      <details key="end" value="449"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.11" references="/0/generateGoMic/%.1/%/%.2/%/%">
-      <details key="start" value="347"/>
-      <details key="end" value="370"/>
+      <details key="start" value="421"/>
+      <details key="end" value="444"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.12" references="/0/generateGoMic/%.1/%/%.2/%/%/aGenerator">
-      <details key="start" value="347"/>
-      <details key="end" value="357"/>
+      <details key="start" value="421"/>
+      <details key="end" value="431"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.13" references="/0/generateGoMic/%.1/%/%.2/%.1">
-      <details key="start" value="376"/>
-      <details key="end" value="430"/>
+      <details key="start" value="450"/>
+      <details key="end" value="578"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.14" references="/0/generateGoMic/%.1/%/%.2/fileName">
-      <details key="start" value="431"/>
-      <details key="end" value="439"/>
+    <eAnnotations source="positions.14" references="/0/generateGoMic/%.1/%/%.2/%.1/%">
+      <details key="start" value="450"/>
+      <details key="end" value="566"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.15" references="/0/generateGoMic/%.1/fileName">
+    <eAnnotations source="positions.15" references="/0/generateGoMic/%.1/%/%.2/%.1/%/%">
+      <details key="start" value="450"/>
+      <details key="end" value="494"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.16" references="/0/generateGoMic/%.1/%/%.2/%.1/%/%.1">
+      <details key="start" value="502"/>
+      <details key="end" value="565"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.17" references="/0/generateGoMic/%.1/%/%.2/%.1/%/%.1/%">
+      <details key="start" value="502"/>
+      <details key="end" value="555"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.18" references="/0/generateGoMic/%.1/%/%.2/%.1/%/%.1/%/%">
+      <details key="start" value="502"/>
+      <details key="end" value="544"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.19" references="/0/generateGoMic/%.1/%/%.2/%.1/%/%.1/%/%/%">
+      <details key="start" value="502"/>
+      <details key="end" value="525"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.20" references="/0/generateGoMic/%.1/%/%.2/%.1/%/%.1/%/%/%/aGenerator">
+      <details key="start" value="502"/>
+      <details key="end" value="512"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.21" references="/0/generateGoMic/%.1/%/%.2/%.1/%.1">
+      <details key="start" value="574"/>
+      <details key="end" value="577"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/generateGoMic/%.1/%/%.2/fileName">
+      <details key="start" value="579"/>
+      <details key="end" value="587"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/generateGoMic/%.1/fileName">
       <details key="start" value="210"/>
       <details key="end" value="227"/>
       <details key="line" value="7"/>
     </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/generateGoMic/%.1/%.1">
+    <eAnnotations source="positions.24" references="/0/generateGoMic/%.1/%.1">
       <details key="start" value="230"/>
-      <details key="end" value="313"/>
+      <details key="end" value="387"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/generateGoMic/%.1/%.1/aGenerator">
+    <eAnnotations source="positions.25" references="/0/generateGoMic/%.1/%.1/aGenerator">
       <details key="start" value="247"/>
       <details key="end" value="257"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.18" references="/0/generateGoMic/%.1/%.1/%">
+    <eAnnotations source="positions.26" references="/0/generateGoMic/%.1/%.1/%">
       <details key="start" value="258"/>
-      <details key="end" value="312"/>
+      <details key="end" value="386"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.19" references="/0/generateGoMic/%.2">
-      <details key="start" value="505"/>
-      <details key="end" value="509"/>
+    <eAnnotations source="positions.27" references="/0/generateGoMic/%.1/%.1/%/%">
+      <details key="start" value="258"/>
+      <details key="end" value="374"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/generateGoMic/%.1/%.1/%/%/%">
+      <details key="start" value="258"/>
+      <details key="end" value="302"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.29" references="/0/generateGoMic/%.1/%.1/%/%/%.1">
+      <details key="start" value="310"/>
+      <details key="end" value="373"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.30" references="/0/generateGoMic/%.1/%.1/%/%/%.1/%">
+      <details key="start" value="310"/>
+      <details key="end" value="363"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.31" references="/0/generateGoMic/%.1/%.1/%/%/%.1/%/%">
+      <details key="start" value="310"/>
+      <details key="end" value="352"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.32" references="/0/generateGoMic/%.1/%.1/%/%/%.1/%/%/%">
+      <details key="start" value="310"/>
+      <details key="end" value="333"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.33" references="/0/generateGoMic/%.1/%.1/%/%/%.1/%/%/%/aGenerator">
+      <details key="start" value="310"/>
+      <details key="end" value="320"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.34" references="/0/generateGoMic/%.1/%.1/%/%.1">
+      <details key="start" value="382"/>
+      <details key="end" value="385"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.35" references="/0/generateGoMic/%.2">
+      <details key="start" value="653"/>
+      <details key="end" value="657"/>
       <details key="line" value="12"/>
     </eAnnotations>
-    <eAnnotations source="positions.20" references="/0/generateGoMic/%.3">
-      <details key="start" value="532"/>
-      <details key="end" value="534"/>
+    <eAnnotations source="positions.36" references="/0/generateGoMic/%.3">
+      <details key="start" value="680"/>
+      <details key="end" value="682"/>
       <details key="line" value="15"/>
     </eAnnotations>
-    <eAnnotations source="positions.21" references="/0/generateGoMic/%.4">
-      <details key="start" value="557"/>
-      <details key="end" value="559"/>
+    <eAnnotations source="positions.37" references="/0/generateGoMic/%.4">
+      <details key="start" value="705"/>
+      <details key="end" value="707"/>
       <details key="line" value="17"/>
     </eAnnotations>
-    <eAnnotations source="positions.22" references="/0/generateGoMic/%.5">
-      <details key="start" value="584"/>
-      <details key="end" value="586"/>
+    <eAnnotations source="positions.38" references="/0/generateGoMic/%.5">
+      <details key="start" value="732"/>
+      <details key="end" value="734"/>
       <details key="line" value="19"/>
     </eAnnotations>
-    <eAnnotations source="positions.23" references="/0/generateGoMic/%.6">
-      <details key="start" value="611"/>
-      <details key="end" value="613"/>
+    <eAnnotations source="positions.39" references="/0/generateGoMic/%.6">
+      <details key="start" value="759"/>
+      <details key="end" value="761"/>
       <details key="line" value="21"/>
     </eAnnotations>
-    <eAnnotations source="positions.24" references="/0/generateGoMic/%.7">
-      <details key="start" value="634"/>
-      <details key="end" value="636"/>
+    <eAnnotations source="positions.40" references="/0/generateGoMic/%.7">
+      <details key="start" value="782"/>
+      <details key="end" value="784"/>
       <details key="line" value="23"/>
     </eAnnotations>
-    <eAnnotations source="positions.25" references="/0/generateGoMic/%.8">
-      <details key="start" value="657"/>
-      <details key="end" value="659"/>
+    <eAnnotations source="positions.41" references="/0/generateGoMic/%.8">
+      <details key="start" value="805"/>
+      <details key="end" value="807"/>
       <details key="line" value="25"/>
     </eAnnotations>
-    <eAnnotations source="positions.26" references="/0/generateGoMic/aGenerator">
+    <eAnnotations source="positions.42" references="/0/generateGoMic/aGenerator">
       <details key="start" value="176"/>
       <details key="end" value="198"/>
       <details key="line" value="5"/>
