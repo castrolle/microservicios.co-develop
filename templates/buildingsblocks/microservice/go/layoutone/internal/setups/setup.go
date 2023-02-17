@@ -1,12 +1,19 @@
-package configurations
+package setups
 
 import (
 	"github.com/caarlos0/env"
 )
 
+const (
+	ProductionLog  = "production"
+	DevelopmentLog = "development"
+)
+
 // Application contains data related to application configuration parameters.
 type Application struct {
+	DryRun          bool   `env:"DRY_RUN" envDefault:"false"`
 	ApplicationPort string `env:"APPLICATION_PORT" envDefault:":8080"`
+	LogLevel        string `env:"LOG_ENVIRONMENT" envDefault:"production"`
 	Repository      RepositoryParameters
 }
 
@@ -16,7 +23,7 @@ type RepositoryParameters struct {
 	Port     int    `env:"DB_PORT" envDefault:"5432"`
 	User     string `env:"DB_USER" envDefault:"postgres"`
 	Password string `env:"DB_PASSWORD" envDefault:"postgres"`
-	DBName   string `env:"DBNAME" envDefault:"people"`
+	DBName   string `env:"DBNAME" envDefault:"postgres"`
 }
 
 // Load load application configuration

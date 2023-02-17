@@ -1,22 +1,44 @@
-# hexagonal-template-go
-go project template for hexagonal architecture structure.
+# pets service
 
-## Description
+This is a service that provides an API for pets administration.
 
-This project is a set of ideas for implementing a hexagonal template for microservices in Go. I'm trying to follow William Kennedy's ideas about developing my own [design philosophy](https://www.ardanlabs.com/blog/2017/01/develop-your-design-philosophy.html).
+## How to build?
 
-I am going to answer these questions posed by William.
+from project folder run below commands, it will output binaries in `./bin/` folder
 
-Who is your audience?
-What are your priorities?
-When do you take exceptions to the rules?
-How do things work?
-Why you are making the decisions you make?
+* just build with current operating system
+```sh
+make build
+```
 
-In the meantime, I will be trying to do the following things. You can find in this repository different branches with different ways to implement a microservice with Go.
+* build for a linux distro operating system
+```sh
+make build-linux
+```
 
-1. I want to try to apply the William Kennedy's package oriented design.
+## How to run a test environment quickly?
 
-## Bibliography
+1. make sure you have docker-compose installed.
+2. run the docker compose.
+```sh
+docker-compose up --build
+```
 
-* https://github.com/tugcekonuklar/account-service
+or run this shortcut
+
+```sh
+make run-local
+```
+
+3. once you are done using the environment follow these steps.
+
+    * ctrl + c
+    * make clean-local
+
+## How to test?
+
+from project folder run the following command
+
+```sh
+make test
+```
