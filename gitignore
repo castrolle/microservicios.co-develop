@@ -15,7 +15,6 @@ local.properties
 .loadpath
 .recommenders
 
-
 # External tool builders
 .externalToolBuilders/
 
@@ -113,6 +112,3 @@ buildNumber.properties
 .factorypath
 .factorypath
 
-
-### Generator ###
-output/
