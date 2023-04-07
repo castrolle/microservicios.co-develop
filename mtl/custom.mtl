@@ -1,0 +1,119 @@
+[comment encoding = UTF-8 /]
+[module custom('http://com/microservice')]
+[import com::microservice::acceleo::module::generator::main::util /]
+
+[template public generateHeaderHtmlComponent(aGenerator : Generator)]
+[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/shared/header/header.component.html')), false)]
+<header class="flex items-center h-20 px-6 sm:px-10 bg-white headerPro">
+  <div class="alignHeader">
+    <div class="menuCompany">
+      <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle" >
+          <span></span>
+        </label>
+        <ul class="menu__box">
+          
+          <li><a class="menu__item" href="/">Home</a></li>
+          <!-- <li><a class="menu__item" href="/pqCreation">por cambiar</a></li> -->
+          <li><a class="menu__item" href="/">Sections</a></li>
+          
+        </ul>
+      </div>
+    </div>
+    <div class="positionLogo">
+      Company
+    </div>
+  </div>
+  <div class="flex flex-shrink-0 items-center ml-auto">
+   
+  </div>
+</header>
+[/file]
+[/template]
+
+
+[template public generateHeaderHtmlComponentJWT(aGenerator : Generator)]
+[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/shared/header/header.component.html')), false)]
+<header class="flex items-center h-20 px-6 sm:px-10 bg-white headerPro">
+  <div class="alignHeader">
+    <div class="menuCompany">
+      <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle" >
+          <span></span>
+        </label>
+        <ul class="menu__box">
+          <li><a class="menu__item" href="/">Home</a></li>
+          <li><a class="menu__item" href="/#/sections">Sections</a></li>
+		  <li *ngIf="!user.name" class="buttons"><a class="menu__item" href="/#/login">Login</a></li>
+ 		  <li *ngIf="user.name" class="buttons"><a (click)="logout()" class="menu__item" href="/">Salir</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="positionLogo">
+      Company
+    </div>
+  </div>
+  <div class="flex flex-shrink-0 items-center ml-auto">
+   
+  </div>
+</header>
+[/file]
+[/template]
+
+
+[template public generateEntityComponent(aGenerator : Generator, entity : Entity)]
+
+[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/sections/').concat(getSimpleAppName(aGenerator,aGenerator.microservice.name)).concat('/').concat(entity.name.toLowerCase()).concat('.component.html')), false)]
+
+<!-- section -->
+<section>
+
+<div class="form">
+  
+<form class="form_general" ['['/]formGroup[']'/]="form[entity.name/]" role="form">
+	<h1 class="h1Register">[entity.name/]</h1>
+    <p class="subtituloRegister">[entity.name/]</p>
+  
+   	<div class="content_two">
+ 		<div class="form_content">
+		[for (entityAtt : EntityAttribute | entity.attributes)]
+ 		 
+        	<label for="">[entityAtt.name/]</label>
+        	<input class="input_form" type="text" placeholder="[entityAtt.name/]" type="text" formControlName="[entityAtt.name/]">
+
+		[/for]
+  		</div>
+  </div>
+
+
+  <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+		[for (service : Service | aGenerator.microservice.services)]
+			[for (path : ServicePath | aGenerator.microservice.services.paths)]
+	    <div class="rounded-md shadow">
+	      <a (click)="[getCapitalNameNonFirst(service.name)/][entity.name/][getCapitalNameNonFirst(path.name)/]()" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+	       	 [getCapitalNameNonFirst(path.name)/]
+	      </a>
+	    </div>
+			[/for]
+		[/for]
+
+
+		[if (aGenerator.microservice.entities <> null and aGenerator.microservice.database <> null)]
+
+	  <div class="content_button_aventureros">
+	      <a class="cancelar" (click)="post[getCapitalName(entity.name).toLowerCase()/]()">Cancelar</a>
+	      <input class="submit" type="submit" (click)="get[getCapitalName(entity.name).toLowerCase()/]()" value="Siguiente">
+	  </div>
+
+		[/if ]
+
+  </div>
+</form>
+
+</div>
+</section>
+	[/file]
+
+[/template]
