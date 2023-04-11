@@ -2,118 +2,223 @@
 [module custom('http://com/microservice')]
 [import com::microservice::acceleo::module::generator::main::util /]
 
-[template public generateHeaderHtmlComponent(aGenerator : Generator)]
-[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/shared/header/header.component.html')), false)]
-<header class="flex items-center h-20 px-6 sm:px-10 bg-white headerPro">
-  <div class="alignHeader">
-    <div class="menuCompany">
-      <div class="hamburger-menu">
-        <input id="menu__toggle" type="checkbox" />
-        <label class="menu__btn" for="menu__toggle" >
-          <span></span>
-        </label>
-        <ul class="menu__box">
-          
-          <li><a class="menu__item" href="/">Home</a></li>
-          <!-- <li><a class="menu__item" href="/pqCreation">por cambiar</a></li> -->
-          <li><a class="menu__item" href="/">Sections</a></li>
-          
-        </ul>
+
+[template public generateCustom(aGenerator : Generator)]
+
+[comment start front generation/]
+[if (aGenerator.microservice.front <> null)]
+	[if aGenerator.microservice.security <> SecurityType::SELF_JWT]
+		[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/shared/header/header.component.html')), false)]
+<header>
+    <nav class="flex items-center justify-between p-6 container mx-auto">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-700" fill="none"  stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+            <span class="no-underline hover:no-underline font-bold text-2xl lg:text-4xl">[getAppName(aGenerator, aGenerator.microservice.name)/]</span>
+        </div>
+        <!-- Menu items -->
+        <div class="text-lg text-gray-600 hidden lg:flex">
+            <a href="#" class="block mt-4 lg:inline-block text-indigo-600 lg:mt-0 mr-10">
+                Home
+            </a>
+            <a href="#/sections" class="block mt-4 lg:inline-block hover:text-gray-700 lg:mt-0 mr-10">
+                Secciones
+            </a>
+        </div>
+
+		[if aGenerator.microservice.gateway <> null]
+ 		 <!-- CTA and Hamburger icon -->
+         <div class="flex items-center">
+          <div *ngIf="!name"  class="mr-5 lg:mr-0">
+              <a href="#/login" class="font-medium text-indigo-600 hover:text-indigo-500">Log in</a>
+          </div>
+    
+          <div *ngIf="name">
+            <button type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+              <span class="sr-only">Perfil</span>
+              <img class="h-8 w-8 rounded-full" src="{{photoUrl}}" alt="">
+            </button>
+          </div>
+
+          <div *ngIf="name"  class="mr-5 lg:mr-0 font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer hidden lg:flex">
+              <a (click)="logOut()" class="font-medium text-indigo-600 hover:text-indigo-500">Salir</a>
+          </div>
+ 
+          <div class="block lg:hidden">
+              <button (click)="toggleMenu()"
+                  class="flex items-center px-4 py-3 border rounded text-indigo-700 border-indigo-900 focus:outline-none">
+                  <svg class="fill-current h-3 w-3 " viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <title>Menu</title>
+                      <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                  </svg>
+              </button>
+
+         
+
+          </div>
       </div>
+		[/if]
+        
+    </nav>
+    <div #mobMenu class="md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a class="text-gray-800 dark:text-white block px-3 py-2 rounded-md text-base font-medium" href="/#">
+                Home
+            </a>
+        </div>
     </div>
-    <div class="positionLogo">
-      Company
-    </div>
-  </div>
-  <div class="flex flex-shrink-0 items-center ml-auto">
-   
-  </div>
+
 </header>
-[/file]
-[/template]
+		[/file]
+	[/if ]
 
+	[if aGenerator.microservice.security = SecurityType::SELF_JWT]
+		[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/shared/header/header.component.html')), false)]
+<header>
+    <nav class="flex items-center justify-between p-6 container mx-auto">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-700" fill="none"  stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+            <span class="no-underline hover:no-underline font-bold text-2xl lg:text-4xl">app-sharedstock-front</span>
+        </div>
+        <!-- Menu items -->
+        <div class="text-lg text-gray-600 hidden lg:flex">
+            <a href="#" class="block mt-4 lg:inline-block text-indigo-600 lg:mt-0 mr-10">
+                Home
+            </a>
+            <a href="#/sections" class="block mt-4 lg:inline-block hover:text-gray-700 lg:mt-0 mr-10">
+                Secciones
+            </a>
+        </div>
 
-[template public generateHeaderHtmlComponentJWT(aGenerator : Generator)]
-[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/shared/header/header.component.html')), false)]
-<header class="flex items-center h-20 px-6 sm:px-10 bg-white headerPro">
-  <div class="alignHeader">
-    <div class="menuCompany">
-      <div class="hamburger-menu">
-        <input id="menu__toggle" type="checkbox" />
-        <label class="menu__btn" for="menu__toggle" >
-          <span></span>
-        </label>
-        <ul class="menu__box">
-          <li><a class="menu__item" href="/">Home</a></li>
-          <li><a class="menu__item" href="/#/sections">Sections</a></li>
-		  <li *ngIf="!user.name" class="buttons"><a class="menu__item" href="/#/login">Login</a></li>
- 		  <li *ngIf="user.name" class="buttons"><a (click)="logout()" class="menu__item" href="/">Salir</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="positionLogo">
-      Company
-    </div>
-  </div>
-  <div class="flex flex-shrink-0 items-center ml-auto">
+        <!-- CTA and Hamburger icon -->
+        <div class="flex items-center">
+            <div *ngIf="!user"  class="mr-5 lg:mr-0">
+                <a href="#/login" class="font-medium text-indigo-600 hover:text-indigo-500">Log in</a>
+            </div>
+      
+      		<div *ngIf="user">
+                <span class="sr-only">{{user.name}}</span>
+            </div>
+  
+            <div *ngIf="user"  class="mr-5 lg:mr-0 font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer hidden lg:flex">
+                <button (click)="logout()" type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    Salir
+                </button>
+                
+            </div>
    
-  </div>
-</header>
-[/file]
-[/template]
+   
+        </div>
+
+        
+    </nav>
+    <div #mobMenu class="md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a class="text-gray-800 dark:text-white block px-3 py-2 rounded-md text-base font-medium" href="/#">
+                Home
+            </a>
+        </div>
+    </div>
+
+   </header>
+
+		[/file]
+	[/if ]
 
 
-[template public generateEntityComponent(aGenerator : Generator, entity : Entity)]
 
-[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/sections/').concat(getSimpleAppName(aGenerator,aGenerator.microservice.name)).concat('/').concat(entity.name.toLowerCase()).concat('.component.html')), false)]
+
+  [for (entity : Entity | aGenerator.microservice.entities)]
+	[file (getFrontName(aGenerator,aGenerator.microservice.front.name).concat('/'.concat('src/app/sections/').concat(getSimpleAppName(aGenerator,aGenerator.microservice.name)).concat('/').concat(entity.name.toLowerCase()).concat('.component.html')), false)]
 
 <!-- section -->
 <section>
 
-<div class="form">
-  
-<form class="form_general" ['['/]formGroup[']'/]="form[entity.name/]" role="form">
-	<h1 class="h1Register">[entity.name/]</h1>
-    <p class="subtituloRegister">[entity.name/]</p>
-  
-   	<div class="content_two">
- 		<div class="form_content">
+<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+<form ['['/]formGroup[']'/]="form[entity.name/]" role="form">
+[entity.name/]
+  <div class="-mx-3 md:flex mb-6">
+
 		[for (entityAtt : EntityAttribute | entity.attributes)]
- 		 
-        	<label for="">[entityAtt.name/]</label>
-        	<input class="input_form" type="text" placeholder="[entityAtt.name/]" type="text" formControlName="[entityAtt.name/]">
+ 			
+ 	<div class="md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-[entity.name/]-[entityAtt.name/]">
+        [entityAtt.name/]
+      </label>
+      <input formControlName="[entityAtt.name/]" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-[entity.name/]-[entityAtt.name/]" type="text" placeholder="[entityAtt.name/]">
+      <p class="text-red text-xs italic">Please fill out this field.</p>
+    </div>
 
 		[/for]
-  		</div>
+   
   </div>
-
-
   <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 		[for (service : Service | aGenerator.microservice.services)]
 			[for (path : ServicePath | aGenerator.microservice.services.paths)]
-	    <div class="rounded-md shadow">
-	      <a (click)="[getCapitalNameNonFirst(service.name)/][entity.name/][getCapitalNameNonFirst(path.name)/]()" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
-	       	 [getCapitalNameNonFirst(path.name)/]
-	      </a>
-	    </div>
+    <div class="rounded-md shadow">
+      <a (click)="[getCapitalNameNonFirst(service.name)/][entity.name/][getCapitalNameNonFirst(path.name)/]()" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+       	 [getCapitalNameNonFirst(path.name)/]
+      </a>
+    </div>
 			[/for]
 		[/for]
-
-
 		[if (aGenerator.microservice.entities <> null and aGenerator.microservice.database <> null)]
+ <div class="rounded-md shadow">
+      <a (click)="get[getCapitalName(entity.name).toLowerCase()/]()" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+       	 get[getCapitalName(entity.name)/]
+      </a>
+    </div>
 
-	  <div class="content_button_aventureros">
-	      <a class="cancelar" (click)="post[getCapitalName(entity.name).toLowerCase()/]()">Cancelar</a>
-	      <input class="submit" type="submit" (click)="get[getCapitalName(entity.name).toLowerCase()/]()" value="Siguiente">
-	  </div>
-
+ <div class="rounded-md shadow">
+      <a (click)="post[getCapitalName(entity.name).toLowerCase()/]()" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+       	 post[getCapitalName(entity.name)/]
+      </a>
+    </div>
 		[/if ]
 
   </div>
 </form>
 
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="border-b">
+            <tr>
+	[for (entityAtt : EntityAttribute | entity.attributes)]
+			  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                 [entityAtt.name/]
+              </th>
+	[/for]
+             
+            </tr>
+          </thead>
+          <tbody>
+			<tr *ngFor="let item of result" class="border-b">
+	[for (entityAtt : EntityAttribute | entity.attributes)]
+ 			 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                {{item.[entityAtt.name/]}}
+              </td>
+	[/for]
+      		</tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 </section>
 	[/file]
+[/for]
+
+[/if]
 
 [/template]
